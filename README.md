@@ -1,4 +1,4 @@
-# Job hunt tracker App - Helper tool to keep track of my job hunt.
+# JobHunt Tracker App - Helper tool to keep track of my job hunt
 
 ## Features
 
