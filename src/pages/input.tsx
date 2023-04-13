@@ -25,7 +25,9 @@ export default function Input({ setUpdate }: InputProps) {
   });
 
   function handleChange(
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: ChangeEvent<
+      HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+    >
   ) {
     setFormValues({ ...formValues, [event.target.name]: event.target.value });
   }
@@ -89,14 +91,32 @@ export default function Input({ setUpdate }: InputProps) {
           onChange={handleChange}
         />
         <label htmlFor="reply">Reply</label>
-        <select className="text-black" name="reply" id="reply">
-          <option value="true">True</option>
-          <option value="false">False</option>
+        <select
+          className="text-black"
+          name="reply"
+          id="reply"
+          onChange={handleChange}
+        >
+          <option id="reply" value="true">
+            True
+          </option>
+          <option id="reply" value="false">
+            False
+          </option>
         </select>
         <label htmlFor="interview">Interview:</label>
-        <select className="text-black" name="interview" id="interview">
-          <option value="true">True</option>
-          <option value="false">False</option>
+        <select
+          className="text-black"
+          name="interview"
+          id="interview"
+          onChange={handleChange}
+        >
+          <option id="interview" value="true">
+            True
+          </option>
+          <option id="interview" value="false">
+            False
+          </option>
         </select>
         <button
           className=" bg-gradient-to-r from-green-700 via-green-800 to-green-900 

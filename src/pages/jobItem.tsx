@@ -23,7 +23,9 @@ export default function JobItem({ item, setUpdate }: JobItemProps) {
   }
 
   function handleChange(
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: ChangeEvent<
+      HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+    >
   ) {
     event.preventDefault();
     setNewFormValues({
@@ -42,8 +44,20 @@ export default function JobItem({ item, setUpdate }: JobItemProps) {
     });
     setUpdate(true);
   }
+
+  function bg(item: ItemProps) {
+    if (item && item.reply === true && item.interview === false) {
+      return "bg-red-600";
+    } else {
+      return "bg-green-600";
+    }
+  }
   return !edit ? (
-    <div className=" bg-green-600 grid grid-rows-5 w-[250px] md:w-[600px] h-[600px] md:text-lg font-medium text-center items-center justify-center p-5 gap-2 mb-5 rounded-md shadow-lg ">
+    <div
+      className={` ${bg(
+        item
+      )} grid grid-rows-5 w-[250px] md:w-[600px] h-[600px] md:text-lg font-medium text-center items-center justify-center p-5 gap-2 mb-5 rounded-md shadow-lg`}
+    >
       <div>
         Company: <p className="font-light">{item?.company_name}</p>
       </div>
@@ -73,7 +87,7 @@ export default function JobItem({ item, setUpdate }: JobItemProps) {
   ) : (
     <div className="bg-green-600 flex flex-col w-[350px] h-[800px] justify-center items-center rounded-md text-sm font-light text-slate-100 md:w-[800px] md:h-[700px] md:text-base md:font-normal py-5">
       <form
-        className="grid grid-row-1 justify-center items-center gap-3 w-[300px] md:grid-cols-1"
+        className="grid grid-row-1 justify-center items-center gap-3 w-[300px] md:grid-cols-1 "
         onSubmit={Update}
       >
         <label htmlFor="company_name">Company Name:</label>
@@ -113,20 +127,39 @@ export default function JobItem({ item, setUpdate }: JobItemProps) {
         />
         <label htmlFor="description">Description:</label>
         <textarea
+          className="truncate hover:text-clip text-black"
           placeholder={item?.description}
           name="description"
           id="description"
           onChange={handleChange}
         />
         <label htmlFor="reply">Reply</label>
-        <select name="reply" id="reply">
-          <option value="true">True</option>
-          <option value="false">False</option>
+        <select
+          name="reply"
+          id="reply"
+          onChange={handleChange}
+          className="truncate hover:text-clip text-black"
+        >
+          <option id="reply" value="true">
+            True
+          </option>
+          <option id="reply" value="false">
+            False
+          </option>
         </select>
         <label htmlFor="interview">Interview:</label>
-        <select name="interview" id="interview">
-          <option value="true">True</option>
-          <option value="false">False</option>
+        <select
+          name="interview"
+          id="interview"
+          onChange={handleChange}
+          className="truncate hover:text-clip text-black"
+        >
+          <option id="interview" value="true">
+            True
+          </option>
+          <option id="interview" value="false">
+            False
+          </option>
         </select>
         <button
           className=" bg-gradient-to-r from-green-700 via-green-800 to-green-900 
@@ -139,7 +172,7 @@ export default function JobItem({ item, setUpdate }: JobItemProps) {
         </button>
         <div className="flex flex-row justify-center items-center">
           <FaBackspace
-            className="w-[35px] h-[35px]"
+            className="w-[35px] h-[35px] text-red-700"
             onClick={() => (!edit ? setEdit(true) : setEdit(false))}
           />
         </div>
